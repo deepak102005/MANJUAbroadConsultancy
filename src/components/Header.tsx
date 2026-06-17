@@ -55,10 +55,10 @@ export default function Header() {
               />
             </div>
             <div>
-              <span className="block text-lg font-bold tracking-wider text-white group-hover:text-accent transition-colors duration-300">
+              <span className="block text-lg font-extrabold tracking-wider text-white transition-colors duration-300">
                 MANJU
               </span>
-              <span className="block text-[10px] tracking-[0.2em] font-medium text-gray-300 uppercase -mt-1">
+              <span className="block text-[10px] tracking-[0.22em] font-bold text-gold-gradient uppercase -mt-1">
                 Abroad Consultancy
               </span>
             </div>

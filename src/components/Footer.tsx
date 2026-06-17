@@ -25,10 +25,10 @@ export default function Footer() {
                 />
               </div>
               <div>
-                <span className="block text-lg font-bold tracking-wider text-white">
+                <span className="block text-lg font-extrabold tracking-wider text-white">
                   MANJU
                 </span>
-                <span className="block text-[10px] tracking-[0.2em] font-medium text-gray-300 uppercase -mt-1">
+                <span className="block text-[10px] tracking-[0.22em] font-bold text-gold-gradient uppercase -mt-1">
                   Abroad Consultancy
                 </span>
               </div>
