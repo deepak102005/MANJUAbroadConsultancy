@@ -40,7 +40,7 @@ export default function Book() {
     numApplicants: "1",
     ds160Confirmation: "",
     requiredDates: "",
-    location: "Hyderabad",
+    location: "Any Location",
     message: "",
   });
 
@@ -475,6 +475,7 @@ export default function Book() {
                               onChange={handleChange}
                               className="w-full px-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white cursor-pointer"
                             >
+                              <option value="Any Location">Any Location</option>
                               <option value="Chennai">Chennai</option>
                               <option value="Hyderabad">Hyderabad</option>
                               <option value="Mumbai">Mumbai</option>
