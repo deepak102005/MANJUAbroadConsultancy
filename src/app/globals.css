@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-inter), sans-serif;
+  background-color: #F9FAFB;
+  color: #111827;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+/* Glassmorphism Styles */
+.glass-card {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.03);
+}
+
+.glass-card-hover {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-hover:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 20px 40px -15px rgba(32, 42, 54, 0.1), 0 0 20px rgba(212, 175, 55, 0.05);
+}
+
+.glass-nav {
+  background: rgba(32, 42, 54, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Golden text and gradient accents */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #E5C158 0%, #D4AF37 50%, #AA8C2C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #E5C158 0%, #D4AF37 50%, #AA8C2C 100%);
+}
+
+.bg-dark-gradient {
+  background: linear-gradient(135deg, #202A36 0%, #171E27 100%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F9FAFB;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D1D5DB;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9CA3AF;
+}
+
+/* Custom animations */
+@keyframes pulse-subtle {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.03); opacity: 0.95; }
+}
+
+.pulse-subtle {
+  animation: pulse-subtle 3s infinite ease-in-out;
+}
