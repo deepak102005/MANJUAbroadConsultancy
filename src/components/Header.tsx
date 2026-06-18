@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Calendar } from "lucide-react";
+import { Menu, X, Calendar, User, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "../../assets/logo.png";
 
@@ -20,6 +20,20 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("manju_currentUser");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("manju_currentUser");
+    setUser(null);
+    window.location.reload();
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +46,11 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Hide header on auth pages
+  if (pathname?.startsWith("/auth")) {
+    return null;
+  }
 
   return (
     <header
@@ -89,19 +108,40 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:block">
-            <Link href="/contact">
-              <motion.button
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="relative px-6 py-2.5 bg-gold-gradient text-primary font-semibold text-sm rounded-xl shadow-gold hover:shadow-xl transition-all duration-300 flex items-center gap-2 overflow-hidden group"
-              >
-                <div className="absolute inset-0 w-1/2 h-full bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-[300%] transition-transform duration-1000 ease-out" />
-                <Calendar className="h-4 w-4" />
-                Book Consultation
-              </motion.button>
-            </Link>
+          {/* Desktop Auth Buttons */}
+          <div className="hidden md:flex items-center gap-4">
+            {user ? (
+              <div className="flex items-center gap-4">
+                <span className="text-gray-300 text-sm font-medium flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-lg border border-white/5">
+                  <User className="h-4 w-4 text-accent" />
+                  Hi, <span className="text-accent font-semibold">{user.name.split(" ")[0]}</span>
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 border border-white/10 hover:border-red-500/30 hover:bg-red-500/10 text-gray-300 hover:text-red-400 text-xs font-semibold rounded-xl transition-all duration-300 flex items-center gap-1.5 cursor-pointer"
+                >
+                  <LogOut className="h-3.5 w-3.5" />
+                  Log Out
+                </button>
+              </div>
+            ) : (
+              <>
+                <Link href="/auth/signin">
+                  <button className="text-gray-300 hover:text-white text-sm font-medium px-4 py-2 transition-colors cursor-pointer">
+                    Sign In
+                  </button>
+                </Link>
+                <Link href="/auth/signup">
+                  <motion.button
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="px-6 py-2.5 bg-gold-gradient text-primary font-bold text-sm rounded-xl shadow-gold hover:shadow-xl transition-all duration-300 cursor-pointer"
+                  >
+                    Sign Up
+                  </motion.button>
+                </Link>
+              </>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -146,13 +186,37 @@ export default function Header() {
                   </Link>
                 );
               })}
-              <div className="pt-4 px-4">
-                <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-                  <button className="w-full py-3 bg-gold-gradient text-primary font-bold text-center rounded-xl shadow-gold flex items-center justify-center gap-2">
-                    <Calendar className="h-4 w-4" />
-                    Book Consultation
-                  </button>
-                </Link>
+              <div className="pt-4 px-4 border-t border-white/10">
+                {user ? (
+                  <div className="flex flex-col gap-3">
+                    <div className="text-center text-gray-300 text-sm py-2">
+                      Logged in as <span className="text-accent font-bold">{user.name}</span>
+                    </div>
+                    <button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        handleLogout();
+                      }}
+                      className="w-full py-3 border border-red-500/20 bg-red-500/10 hover:bg-red-500/20 text-red-400 font-bold text-center rounded-xl flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Log Out
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex flex-col gap-3">
+                    <Link href="/auth/signin" onClick={() => setMobileMenuOpen(false)}>
+                      <button className="w-full py-3 border border-white/10 hover:bg-white/5 text-white font-bold text-center rounded-xl cursor-pointer">
+                        Sign In
+                      </button>
+                    </Link>
+                    <Link href="/auth/signup" onClick={() => setMobileMenuOpen(false)}>
+                      <button className="w-full py-3 bg-gold-gradient text-primary font-bold text-center rounded-xl shadow-gold cursor-pointer">
+                        Sign Up
+                      </button>
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>
