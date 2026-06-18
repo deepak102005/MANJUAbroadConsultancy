@@ -22,7 +22,7 @@ import {
 
 // Statistics Data
 const stats = [
-  { value: "1000+", label: "Slots Booked Successfully", icon: Calendar },
+  { value: "10k+", label: "Slots Booked Successfully", icon: Calendar },
   { value: "95%", label: "DS-160 Form Accuracy", icon: FileText },
   { value: "24/7", label: "Consulate Monitoring", icon: Clock },
   { value: "5", label: "Major US Visa Hubs", icon: MapPin },
@@ -228,7 +228,7 @@ export default function Home() {
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </Link>
-            <Link href="/book" className="w-full sm:w-auto">
+            <Link href="/contact" className="w-full sm:w-auto">
               <button className="w-full sm:w-auto px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 font-bold rounded-xl transition-all duration-300">
                 Free Consultation
               </button>

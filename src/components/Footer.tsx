@@ -1,7 +1,8 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, MapPin, Award } from "lucide-react";
-import LogoIcon from "./LogoIcon";
+import logo from "../../assets/logo.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,13 +14,21 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Col 1: Brand Info */}
           <div className="space-y-6">
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <LogoIcon className="w-10 h-10 group-hover:scale-105 transition-transform duration-300" />
+            <Link href="/" className="flex items-center gap-3 sm:gap-4 group">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white flex items-center justify-center shadow-gold overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                <Image
+                  src={logo}
+                  alt="MANJU ABROAD CONSULTANCY Logo"
+                  width={64}
+                  height={64}
+                  className="w-full h-full object-cover"
+                />
+              </div>
               <div>
-                <span className="block text-xl font-serif font-bold tracking-wider text-white group-hover:text-accent transition-colors duration-300">
+                <span className="block text-2xl sm:text-3xl font-serif font-extrabold tracking-wider text-white group-hover:text-accent transition-colors duration-300">
                   MANJU
                 </span>
-                <span className="block text-[10px] tracking-[0.22em] font-bold text-gold-gradient uppercase -mt-1.5">
+                <span className="block text-[10px] sm:text-xs tracking-[0.22em] font-bold text-gold-gradient uppercase -mt-0.5">
                   Abroad Consultancy
                 </span>
               </div>
@@ -93,16 +102,6 @@ export default function Footer() {
               Get In Touch
             </h3>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <MapPin className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                <span className="text-sm leading-relaxed text-gray-400">
-                  #68-3-17, NSM School Road,
-                  <br />
-                  Patamata, Vijayawada - 520010,
-                  <br />
-                  Krishna District, Andhra Pradesh
-                </span>
-              </li>
               <li className="flex items-center gap-3">
                 <Phone className="h-4 w-4 text-accent shrink-0" />
                 <a

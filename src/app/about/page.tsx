@@ -35,7 +35,7 @@ export default function About() {
             transition={{ duration: 0.5 }}
             className="inline-block px-3 py-1 rounded-full bg-accent/15 border border-accent/20 text-accent text-xs font-bold tracking-wider mb-4 uppercase"
           >
-            Since 2026
+            Since 2018
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}

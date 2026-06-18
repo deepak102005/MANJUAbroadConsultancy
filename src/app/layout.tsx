@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import logo from "../../assets/logo.png";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,6 +27,10 @@ export const metadata: Metadata = {
     "Suresh Kumar Visa Consultancy",
   ],
   authors: [{ name: "A. Suresh Kumar" }],
+  icons: {
+    icon: logo.src,
+    apple: logo.src,
+  },
 };
 
 export default function RootLayout({

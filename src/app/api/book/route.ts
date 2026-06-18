@@ -17,12 +17,7 @@ export async function POST(request: Request) {
       secAns2,
       secQuestion3,
       secAns3,
-      visaCategory,
-      numApplicants,
-      ds160Confirmation,
-      requiredDates,
-      location,
-      message,
+      applicants,
     } = body;
 
     // Backend validation for required fields
@@ -34,16 +29,30 @@ export async function POST(request: Request) {
       !city ||
       !userId ||
       !password ||
-      !visaCategory ||
-      !numApplicants ||
-      !ds160Confirmation ||
-      !requiredDates ||
-      !location
+      !applicants ||
+      !Array.isArray(applicants) ||
+      applicants.length === 0
     ) {
       return NextResponse.json(
         { error: "Required fields are missing. Please complete all fields." },
         { status: 400 }
       );
+    }
+
+    // Validate each applicant's details
+    for (let i = 0; i < applicants.length; i++) {
+      const app = applicants[i];
+      if (
+        !app.visaCategory ||
+        !app.ds160Confirmation ||
+        !app.requiredDates ||
+        !app.location
+      ) {
+        return NextResponse.json(
+          { error: `Required details for Applicant #${i + 1} are missing.` },
+          { status: 400 }
+        );
+      }
     }
 
     // Node.js Backend mock persistence (database logs / security check logs)
@@ -60,13 +69,15 @@ export async function POST(request: Request) {
     console.log(`Q2: ${secQuestion2 || "N/A"} -> Ans: ${secAns2 || "N/A"}`);
     console.log(`Q3: ${secQuestion3 || "N/A"} -> Ans: ${secAns3 || "N/A"}`);
     console.log("--------------------------------------------------");
-    console.log("APPOINTMENT BOOKING DETAILS:");
-    console.log(`Type of Visa: ${visaCategory}`);
-    console.log(`No. of Applicants: ${numApplicants}`);
-    console.log(`DS-160 Confirmation No: ${ds160Confirmation}`);
-    console.log(`Required Dates: ${requiredDates}`);
-    console.log(`Target Location: ${location}`);
-    console.log(`Client Message: ${message || "N/A"}`);
+    console.log(`APPLICANTS DETAILS (${applicants.length}):`);
+    applicants.forEach((app, index) => {
+      console.log(`\n--- Applicant #${index + 1} ---`);
+      console.log(`Type of Visa: ${app.visaCategory}`);
+      console.log(`DS-160 Confirmation No: ${app.ds160Confirmation}`);
+      console.log(`Required Dates: ${app.requiredDates}`);
+      console.log(`Target Location: ${app.location}`);
+      console.log(`Client Message: ${app.message || "N/A"}`);
+    });
     console.log("==================================================");
 
     // Return success

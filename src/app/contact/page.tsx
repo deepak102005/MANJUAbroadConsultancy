@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Phone, Mail, MapPin, Clock, Send, User, MessageSquare, Loader2, CheckCircle, Smartphone } from "lucide-react";
+import { Phone, Mail, Clock, Send, User, MessageSquare, Loader2, CheckCircle, Smartphone } from "lucide-react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -81,7 +81,7 @@ export default function Contact() {
       <section className="py-24 bg-bgLight">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Contact Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
             {/* Phone Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -116,23 +116,6 @@ export default function Contact() {
               </a>
             </motion.div>
 
-            {/* Address Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="glass-card p-6 rounded-2xl flex flex-col items-center text-center border border-gray-200/60 lg:col-span-1"
-            >
-              <div className="w-12 h-12 rounded-xl bg-primary/5 border border-primary/10 flex items-center justify-center mb-4">
-                <MapPin className="h-6 w-6 text-primary" />
-              </div>
-              <h3 className="text-sm font-bold text-primary mb-2">Our Office</h3>
-              <span className="text-xs text-secondary leading-relaxed font-medium">
-                #68-3-17, NSM School Road, Patamata, Vijayawada - 520010, AP
-              </span>
-            </motion.div>
-
             {/* Hours Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -151,159 +134,140 @@ export default function Contact() {
             </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch mb-20">
-            {/* Left: Contact Form */}
-            <div className="lg:col-span-7">
-              <div className="glass-card p-6 sm:p-10 rounded-2xl border border-gray-200/60 shadow-premium">
-                <h3 className="text-lg font-bold text-primary mb-6">Send A Message</h3>
+          <div className="max-w-3xl mx-auto mb-20">
+            <div className="glass-card p-6 sm:p-10 rounded-2xl border border-gray-200/60 shadow-premium">
+              <h3 className="text-lg font-bold text-primary mb-6">Send A Message</h3>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {/* Name */}
-                    <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
-                        Full Name *
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="text"
-                          name="name"
-                          required
-                          value={formData.name}
-                          onChange={handleChange}
-                          placeholder="Your Name"
-                          className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
-                        />
-                        <User className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
-                      </div>
-                    </div>
-
-                    {/* Phone */}
-                    <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
-                        Phone Number *
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="tel"
-                          name="phone"
-                          required
-                          value={formData.phone}
-                          onChange={handleChange}
-                          placeholder="Your Phone Number"
-                          className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
-                        />
-                        <Phone className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Email & Subject */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
-                        Email Address *
-                      </label>
-                      <div className="relative">
-                        <input
-                          type="email"
-                          name="email"
-                          required
-                          value={formData.email}
-                          onChange={handleChange}
-                          placeholder="yourname@gmail.com"
-                          className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
-                        />
-                        <Mail className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
-                        Subject *
-                      </label>
-                      <input
-                        type="text"
-                        name="subject"
-                        required
-                        value={formData.subject}
-                        onChange={handleChange}
-                        placeholder="e.g. F1 Visa Slot Booking"
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Message */}
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {/* Name */}
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
-                      Message *
+                      Full Name *
                     </label>
                     <div className="relative">
-                      <textarea
-                        name="message"
+                      <input
+                        type="text"
+                        name="name"
                         required
-                        rows={5}
-                        value={formData.message}
+                        value={formData.name}
                         onChange={handleChange}
-                        placeholder="Write your detailed query here..."
+                        placeholder="Your Name"
                         className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
                       />
-                      <MessageSquare className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
+                      <User className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
                     </div>
                   </div>
 
-                  {error && (
-                    <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-xs text-red-600 font-medium">
-                      {error}
+                  {/* Phone */}
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
+                      Phone Number *
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="tel"
+                        name="phone"
+                        required
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder="Your Phone Number"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
+                      />
+                      <Phone className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
                     </div>
-                  )}
+                  </div>
+                </div>
 
-                  {success && (
-                    <div className="p-4 rounded-xl bg-green-50 border border-green-200 text-xs text-green-700 font-medium flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 text-green-600 shrink-0" />
-                      Message sent successfully! We will get back to you shortly.
+                {/* Email & Subject */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
+                      Email Address *
+                    </label>
+                    <div className="relative">
+                      <input
+                        type="email"
+                        name="email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="yourname@gmail.com"
+                        className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
+                      />
+                      <Mail className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
                     </div>
+                  </div>
+
+                  {/* Subject */}
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
+                      Subject *
+                    </label>
+                    <input
+                      type="text"
+                      name="subject"
+                      required
+                      value={formData.subject}
+                      onChange={handleChange}
+                      placeholder="e.g. F1 Visa Slot Booking"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
+                    />
+                  </div>
+                </div>
+
+                {/* Message */}
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
+                    Message *
+                  </label>
+                  <div className="relative">
+                    <textarea
+                      name="message"
+                      required
+                      rows={5}
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Write your detailed query here..."
+                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
+                    />
+                    <MessageSquare className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
+                  </div>
+                </div>
+
+                {error && (
+                  <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-xs text-red-600 font-medium">
+                    {error}
+                  </div>
+                )}
+
+                {success && (
+                  <div className="p-4 rounded-xl bg-green-50 border border-green-200 text-xs text-green-700 font-medium flex items-center gap-2">
+                    <CheckCircle className="h-4 w-4 text-green-600 shrink-0" />
+                    Message sent successfully! We will get back to you shortly.
+                  </div>
+                )}
+
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  disabled={loading}
+                  type="submit"
+                  className="w-full py-4 bg-primary text-white font-bold rounded-xl shadow-premium hover:bg-primary-dark transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
+                >
+                  {loading ? (
+                    <>
+                      <Loader2 className="h-5 w-5 animate-spin" />
+                      Sending Message...
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <Send className="h-4 w-4" />
+                    </>
                   )}
-
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    disabled={loading}
-                    type="submit"
-                    className="w-full py-4 bg-primary text-white font-bold rounded-xl shadow-premium hover:bg-primary-dark transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
-                  >
-                    {loading ? (
-                      <>
-                        <Loader2 className="h-5 w-5 animate-spin" />
-                        Sending Message...
-                      </>
-                    ) : (
-                      <>
-                        Send Message
-                        <Send className="h-4 w-4" />
-                      </>
-                    )}
-                  </motion.button>
-                </form>
-              </div>
-            </div>
-
-            {/* Right: Map Iframe wrapper */}
-            <div className="lg:col-span-5 h-full min-h-[400px] flex flex-col">
-              <div className="glass-card rounded-2xl overflow-hidden border border-gray-200/60 shadow-premium flex-grow h-full relative p-2">
-                <iframe
-                  title="Manju Abroad Consultancy Office Map"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3825.4371493010537!2d80.66280037583689!3d16.498305027581177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35fb4d1b827e7f%3A0xc39f8f2b7a421b8b!2sNSM%20Public%20School!5e0!3m2!1sen!2sin!4v1718500000000!5m2!1sen!2sin"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0, minHeight: "380px" }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="rounded-xl"
-                />
-              </div>
+                </motion.button>
+              </form>
             </div>
           </div>
         </div>

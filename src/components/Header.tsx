@@ -2,10 +2,11 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, Calendar } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import LogoIcon from "./LogoIcon";
+import logo from "../../assets/logo.png";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -43,13 +44,21 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <LogoIcon className="w-10 h-10 group-hover:scale-105 transition-transform duration-300" />
+          <Link href="/" className="flex items-center gap-3 sm:gap-4 group">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white flex items-center justify-center shadow-gold overflow-hidden group-hover:scale-105 transition-transform duration-300">
+              <Image
+                src={logo}
+                alt="MANJU ABROAD CONSULTANCY Logo"
+                width={64}
+                height={64}
+                className="w-full h-full object-cover"
+              />
+            </div>
             <div>
-              <span className="block text-xl font-serif font-bold tracking-wider text-white group-hover:text-accent transition-colors duration-300">
+              <span className="block text-2xl sm:text-3xl font-serif font-extrabold tracking-wider text-white group-hover:text-accent transition-colors duration-300">
                 MANJU
               </span>
-              <span className="block text-[10px] tracking-[0.22em] font-bold text-gold-gradient uppercase -mt-1.5">
+              <span className="block text-[10px] sm:text-xs tracking-[0.22em] font-bold text-gold-gradient uppercase -mt-0.5">
                 Abroad Consultancy
               </span>
             </div>
@@ -82,7 +91,7 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden md:block">
-            <Link href="/book">
+            <Link href="/contact">
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
@@ -138,7 +147,7 @@ export default function Header() {
                 );
               })}
               <div className="pt-4 px-4">
-                <Link href="/book" onClick={() => setMobileMenuOpen(false)}>
+                <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
                   <button className="w-full py-3 bg-gold-gradient text-primary font-bold text-center rounded-xl shadow-gold flex items-center justify-center gap-2">
                     <Calendar className="h-4 w-4" />
                     Book Consultation

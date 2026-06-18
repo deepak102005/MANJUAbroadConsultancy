@@ -18,7 +18,9 @@ import {
   ArrowRight,
   Loader2,
   Sparkles,
-  Users
+  Users,
+  Plus,
+  Trash2
 } from "lucide-react";
 
 export default function Book() {
@@ -36,13 +38,18 @@ export default function Book() {
     secAns2: "",
     secQuestion3: "",
     secAns3: "",
-    visaCategory: "Student Visa (F1)",
-    numApplicants: "1",
-    ds160Confirmation: "",
-    requiredDates: "",
-    location: "Any Location",
-    message: "",
   });
+
+  const [applicants, setApplicants] = useState([
+    {
+      visaCategory: "Student Visa (F1)",
+      customVisaCategory: "",
+      ds160Confirmation: "",
+      requiredDates: "",
+      location: "Any Location",
+      message: "",
+    },
+  ]);
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -54,16 +61,63 @@ export default function Book() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleApplicantChange = (
+    index: number,
+    field: string,
+    value: string
+  ) => {
+    const updatedApplicants = [...applicants];
+    updatedApplicants[index] = {
+      ...updatedApplicants[index],
+      [field]: value,
+    };
+    setApplicants(updatedApplicants);
+  };
+
+  const addApplicant = () => {
+    setApplicants([
+      ...applicants,
+      {
+        visaCategory: "Student Visa (F1)",
+        customVisaCategory: "",
+        ds160Confirmation: "",
+        requiredDates: "",
+        location: "Any Location",
+        message: "",
+      },
+    ]);
+  };
+
+  const removeApplicant = (index: number) => {
+    if (applicants.length > 1) {
+      setApplicants(applicants.filter((_, i) => i !== index));
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
 
     try {
+      // Map applicants array so that if visaCategory is "Other", we send the customVisaCategory value
+      const compiledApplicants = applicants.map((app) => ({
+        visaCategory: app.visaCategory === "Other" ? app.customVisaCategory : app.visaCategory,
+        ds160Confirmation: app.ds160Confirmation,
+        requiredDates: app.requiredDates,
+        location: app.location,
+        message: app.message,
+      }));
+
+      const payload = {
+        ...formData,
+        applicants: compiledApplicants,
+      };
+
       const res = await fetch("/api/book", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       });
 
       const data = await res.json();
@@ -380,128 +434,168 @@ export default function Book() {
                       </div>
 
                       {/* Section 3: Visa details */}
-                      <div className="space-y-4">
+                      <div className="space-y-6">
                         <h3 className="text-sm font-bold text-accent uppercase tracking-wider border-b border-gray-200/60 pb-2">
                           3. Visa Details & Scheduling Preferences
                         </h3>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                          {/* Type of Visa */}
-                          <div>
-                            <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
-                              Type of Visa *
-                            </label>
-                            <select
-                              name="visaCategory"
-                              value={formData.visaCategory}
-                              onChange={handleChange}
-                              className="w-full px-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white cursor-pointer"
+                        <div className="space-y-6">
+                          {applicants.map((applicant, index) => (
+                            <div
+                              key={index}
+                              className="p-5 sm:p-6 rounded-2xl bg-white/40 border border-gray-200/60 shadow-sm relative space-y-6"
                             >
-                              <option value="Student Visa (F1)">Student Visa (F1)</option>
-                              <option value="H1B Visa">H1B Visa</option>
-                              <option value="H4 Visa">H4 Visa</option>
-                              <option value="B1/B2 Visa">B1/B2 Visa</option>
-                              <option value="Visa Slot Booking">Visa Slot Booking</option>
-                            </select>
-                          </div>
+                              {/* Header for Applicant */}
+                              <div className="flex justify-between items-center pb-2 border-b border-gray-200/40">
+                                <span className="text-xs font-bold text-primary uppercase tracking-wider flex items-center gap-1.5">
+                                  <Users className="h-4 w-4 text-accent" />
+                                  Applicant #{index + 1}
+                                </span>
+                                {index > 0 && (
+                                  <button
+                                    type="button"
+                                    onClick={() => removeApplicant(index)}
+                                    className="text-xs font-bold text-red-500 hover:text-red-700 transition-colors flex items-center gap-1 cursor-pointer"
+                                  >
+                                    <Trash2 className="h-3.5 w-3.5" />
+                                    Remove
+                                  </button>
+                                )}
+                              </div>
 
-                          {/* No. of applicants */}
-                          <div>
-                            <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
-                              No. of Applicants *
-                            </label>
-                            <div className="relative">
-                              <input
-                                type="number"
-                                name="numApplicants"
-                                required
-                                min="1"
-                                value={formData.numApplicants}
-                                onChange={handleChange}
-                                className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
-                              />
-                              <Users className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
-                            </div>
-                          </div>
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                {/* Type of Visa */}
+                                <div className="space-y-3">
+                                  <div>
+                                    <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
+                                      Type of Visa *
+                                    </label>
+                                    <select
+                                      value={applicant.visaCategory}
+                                      onChange={(e) =>
+                                        handleApplicantChange(index, "visaCategory", e.target.value)
+                                      }
+                                      className="w-full px-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white cursor-pointer"
+                                    >
+                                      <option value="Student Visa (F1)">Student Visa (F1)</option>
+                                      <option value="H1B Visa">H1B Visa</option>
+                                      <option value="H4 Visa">H4 Visa</option>
+                                      <option value="B1/B2 Visa">B1/B2 Visa</option>
+                                      <option value="Other">Other</option>
+                                    </select>
+                                  </div>
 
-                          {/* DS-160 */}
-                          <div>
-                            <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
-                              DS-160 Confirmation No *
-                            </label>
-                            <div className="relative">
-                              <input
-                                type="text"
-                                name="ds160Confirmation"
-                                required
-                                value={formData.ds160Confirmation}
-                                onChange={handleChange}
-                                placeholder="e.g. AA00XXXXXX"
-                                className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
-                              />
-                              <FileText className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
+                                  {applicant.visaCategory === "Other" && (
+                                    <div className="relative">
+                                      <input
+                                        type="text"
+                                        required
+                                        value={applicant.customVisaCategory}
+                                        onChange={(e) =>
+                                          handleApplicantChange(index, "customVisaCategory", e.target.value)
+                                        }
+                                        placeholder="Specify visa type (e.g. F2 Visa)"
+                                        className="w-full px-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
+                                      />
+                                    </div>
+                                  )}
+                                </div>
+
+                                {/* DS-160 */}
+                                <div>
+                                  <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
+                                    DS-160 Confirmation No *
+                                  </label>
+                                  <div className="relative">
+                                    <input
+                                      type="text"
+                                      required
+                                      value={applicant.ds160Confirmation}
+                                      onChange={(e) =>
+                                        handleApplicantChange(index, "ds160Confirmation", e.target.value)
+                                      }
+                                      placeholder="e.g. AA00XXXXXX"
+                                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
+                                    />
+                                    <FileText className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                {/* Required Dates */}
+                                <div>
+                                  <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
+                                    Required Dates *
+                                  </label>
+                                  <div className="relative">
+                                    <input
+                                      type="text"
+                                      required
+                                      value={applicant.requiredDates}
+                                      onChange={(e) =>
+                                        handleApplicantChange(index, "requiredDates", e.target.value)
+                                      }
+                                      placeholder="e.g. Oct 10 to Nov 15"
+                                      className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
+                                    />
+                                    <Calendar className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
+                                  </div>
+                                </div>
+
+                                {/* Location */}
+                                <div>
+                                  <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
+                                    Location *
+                                  </label>
+                                  <select
+                                    value={applicant.location}
+                                    onChange={(e) =>
+                                      handleApplicantChange(index, "location", e.target.value)
+                                    }
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white cursor-pointer"
+                                  >
+                                    <option value="Any Location">Any Location</option>
+                                    <option value="Chennai">Chennai</option>
+                                    <option value="Hyderabad">Hyderabad</option>
+                                    <option value="Mumbai">Mumbai</option>
+                                    <option value="Kolkata">Kolkata</option>
+                                    <option value="New Delhi">New Delhi</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              {/* Message */}
+                              <div>
+                                <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
+                                  Additional Message / Specific Instructions
+                                </label>
+                                <div className="relative">
+                                  <textarea
+                                    rows={2}
+                                    value={applicant.message}
+                                    onChange={(e) =>
+                                      handleApplicantChange(index, "message", e.target.value)
+                                    }
+                                    placeholder="Any further details or travel constraints..."
+                                    className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
+                                  />
+                                  <MessageSquare className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
+                                </div>
+                              </div>
                             </div>
-                          </div>
+                          ))}
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                          {/* Required Dates */}
-                          <div>
-                            <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
-                              Required Dates *
-                            </label>
-                            <div className="relative">
-                              <input
-                                type="text"
-                                name="requiredDates"
-                                required
-                                value={formData.requiredDates}
-                                onChange={handleChange}
-                                placeholder="e.g. Oct 10 to Nov 15"
-                                className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
-                              />
-                              <Calendar className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
-                            </div>
-                          </div>
-
-                          {/* Location */}
-                          <div>
-                            <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
-                              Location *
-                            </label>
-                            <select
-                              name="location"
-                              value={formData.location}
-                              onChange={handleChange}
-                              className="w-full px-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white cursor-pointer"
-                            >
-                              <option value="Any Location">Any Location</option>
-                              <option value="Chennai">Chennai</option>
-                              <option value="Hyderabad">Hyderabad</option>
-                              <option value="Mumbai">Mumbai</option>
-                              <option value="Kolkata">Kolkata</option>
-                              <option value="New Delhi">New Delhi</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        {/* Message */}
-                        <div>
-                          <label className="block text-xs font-bold uppercase tracking-wider text-primary mb-2">
-                            Additional Message / Specific Instructions
-                          </label>
-                          <div className="relative">
-                            <textarea
-                              name="message"
-                              rows={3}
-                              value={formData.message}
-                              onChange={handleChange}
-                              placeholder="Any further details or travel constraints..."
-                              className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200/60 focus:outline-none focus:border-accent text-sm transition-colors bg-white"
-                            />
-                            <MessageSquare className="absolute left-3.5 top-3.5 h-4 w-4 text-gray-400" />
-                          </div>
-                        </div>
+                        {/* Add Applicant Button */}
+                        <button
+                          type="button"
+                          onClick={addApplicant}
+                          className="w-full py-3.5 border border-dashed border-accent/60 text-accent hover:text-accent-light hover:border-accent hover:bg-accent/5 font-bold text-sm rounded-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                        >
+                          <Plus className="h-4 w-4" />
+                          Add Another Applicant
+                        </button>
                       </div>
 
                       {/* Legitimate Process Note */}
@@ -559,7 +653,34 @@ export default function Book() {
                       Thank you for submitting your booking details. A. Suresh Kumar and our scheduling assistants will verify your credentials and begin the manual scheduling process soon. We will message you on WhatsApp once a slot matches your requested dates.
                     </p>
                     <button
-                      onClick={() => setSuccess(false)}
+                      onClick={() => {
+                        setSuccess(false);
+                        setApplicants([
+                          {
+                            visaCategory: "Student Visa (F1)",
+                            customVisaCategory: "",
+                            ds160Confirmation: "",
+                            requiredDates: "",
+                            location: "Any Location",
+                            message: "",
+                          },
+                        ]);
+                        setFormData({
+                          name: "",
+                          phone: "",
+                          whatsapp: "",
+                          email: "",
+                          city: "",
+                          userId: "",
+                          password: "",
+                          secQuestion1: "",
+                          secAns1: "",
+                          secQuestion2: "",
+                          secAns2: "",
+                          secQuestion3: "",
+                          secAns3: "",
+                        });
+                      }}
                       className="px-6 py-2.5 bg-primary text-white font-semibold text-sm rounded-xl hover:bg-primary-light transition-colors"
                     >
                       Submit Another Request
@@ -605,20 +726,6 @@ export default function Book() {
                       <a href="mailto:manjuabroadconsultancy@gmail.com" className="text-sm text-gray-100 font-semibold hover:text-accent transition-colors break-all">
                         manjuabroadconsultancy@gmail.com
                       </a>
-                    </div>
-                  </li>
-
-                  <li className="flex items-start gap-4">
-                    <MapPin className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-                    <div>
-                      <span className="block text-xs text-gray-400 font-medium">Head Office</span>
-                      <span className="text-sm text-gray-200 leading-relaxed font-medium block mt-1">
-                        #68-3-17, NSM School Road,
-                        <br />
-                        Patamata, Vijayawada - 520010,
-                        <br />
-                        Krishna District, Andhra Pradesh
-                      </span>
                     </div>
                   </li>
                 </ul>
