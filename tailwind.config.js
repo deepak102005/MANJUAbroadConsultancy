@@ -28,6 +28,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "sans-serif"],
+        serif: ["Cinzel", "Playfair Display", "Georgia", "serif"],
       },
       boxShadow: {
         premium: "0 10px 30px -10px rgba(32, 42, 54, 0.08)",

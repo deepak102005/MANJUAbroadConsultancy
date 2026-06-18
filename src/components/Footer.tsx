@@ -1,8 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Phone, Mail, MapPin, Award } from "lucide-react";
-import logo from "../../assets/logo.png";
+import LogoIcon from "./LogoIcon";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -14,21 +13,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Col 1: Brand Info */}
           <div className="space-y-6">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-gold overflow-hidden">
-                <Image
-                  src={logo}
-                  alt="MANJU ABROAD CONSULTANCY Logo"
-                  width={40}
-                  height={40}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <LogoIcon className="w-10 h-10 group-hover:scale-105 transition-transform duration-300" />
               <div>
-                <span className="block text-lg font-extrabold tracking-wider text-white">
+                <span className="block text-xl font-serif font-bold tracking-wider text-white group-hover:text-accent transition-colors duration-300">
                   MANJU
                 </span>
-                <span className="block text-[10px] tracking-[0.22em] font-bold text-gold-gradient uppercase -mt-1">
+                <span className="block text-[10px] tracking-[0.22em] font-bold text-gold-gradient uppercase -mt-1.5">
                   Abroad Consultancy
                 </span>
               </div>

@@ -2,11 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X, Calendar } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import logo from "../../assets/logo.png";
+import LogoIcon from "./LogoIcon";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -44,21 +43,13 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-gold overflow-hidden group-hover:scale-105 transition-transform duration-300">
-              <Image
-                src={logo}
-                alt="MANJU ABROAD CONSULTANCY Logo"
-                width={40}
-                height={40}
-                className="w-full h-full object-cover"
-              />
-            </div>
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <LogoIcon className="w-10 h-10 group-hover:scale-105 transition-transform duration-300" />
             <div>
-              <span className="block text-lg font-extrabold tracking-wider text-white transition-colors duration-300">
+              <span className="block text-xl font-serif font-bold tracking-wider text-white group-hover:text-accent transition-colors duration-300">
                 MANJU
               </span>
-              <span className="block text-[10px] tracking-[0.22em] font-bold text-gold-gradient uppercase -mt-1">
+              <span className="block text-[10px] tracking-[0.22em] font-bold text-gold-gradient uppercase -mt-1.5">
                 Abroad Consultancy
               </span>
             </div>
