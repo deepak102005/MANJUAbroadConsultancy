@@ -88,24 +88,24 @@ export default function Services() {
   return (
     <div className="relative">
       {/* Page Hero */}
-      <section className="bg-dark-gradient py-24 md:py-32 border-b border-white/10 relative overflow-hidden">
+      <section className="bg-dark-gradient py-24 md:py-32 border-b border-accent/15 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-light/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-6"
           >
-            US Visa <span className="text-gold-gradient">Specialties</span>
+            US Visa <span className="text-sky-gradient">Specialties</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-3xl mx-auto text-base sm:text-lg text-gray-300 leading-relaxed font-light"
+            className="max-w-3xl mx-auto text-base sm:text-lg text-secondary leading-relaxed font-light"
           >
             We focus exclusively on providing expert advice on Indian visa centers, complete DS-160 form preparation, and manual scheduling of biometrics and interview slots.
           </motion.p>
@@ -169,16 +169,16 @@ export default function Services() {
       </section>
 
       {/* Additional Supporting Services */}
-      <section className="py-24 bg-primary text-white relative overflow-hidden">
+      <section className="py-24 bg-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-light/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-base font-semibold uppercase tracking-wider text-accent mb-3">
               Technical Checkups
             </h2>
-            <p className="text-3xl sm:text-4xl font-bold tracking-tight">
+            <p className="text-3xl sm:text-4xl font-bold tracking-tight text-primary">
               Operational Value Additions
             </p>
             <div className="h-1 w-12 bg-accent mx-auto mt-4" />
@@ -194,16 +194,16 @@ export default function Services() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.08 }}
-                  className="bg-white/5 border border-white/10 hover:border-accent/40 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between"
+                  className="bg-bgLight border border-accent/15 hover:border-accent/40 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between"
                 >
                   <div>
-                    <div className="w-10 h-10 rounded-xl bg-gold-gradient/15 border border-accent/20 flex items-center justify-center mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-sky-gradient/15 border border-accent/20 flex items-center justify-center mb-4">
                       <Icon className="h-5 w-5 text-accent" />
                     </div>
-                    <h3 className="text-sm font-bold text-white mb-2">
+                    <h3 className="text-sm font-bold text-primary mb-2">
                       {service.title}
                     </h3>
-                    <p className="text-xs text-gray-400 font-light leading-relaxed">
+                    <p className="text-xs text-secondary font-light leading-relaxed">
                       {service.desc}
                     </p>
                   </div>

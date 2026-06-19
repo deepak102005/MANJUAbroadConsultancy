@@ -137,24 +137,24 @@ export default function Book() {
   return (
     <div className="relative">
       {/* Page Hero */}
-      <section className="bg-dark-gradient py-24 md:py-32 border-b border-white/10 relative overflow-hidden">
+      <section className="bg-dark-gradient py-24 md:py-32 border-b border-accent/15 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-light/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-6"
           >
-            Visa Slot <span className="text-gold-gradient">Booking Assistance</span>
+            Visa Slot <span className="text-sky-gradient">Booking Assistance</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-3xl mx-auto text-base sm:text-lg text-gray-300 leading-relaxed font-light"
+            className="max-w-3xl mx-auto text-base sm:text-lg text-secondary leading-relaxed font-light"
           >
             Submit your visa portal credentials and requirements securely. Our team coordinates manually to reserve slots.
           </motion.p>
@@ -178,7 +178,7 @@ export default function Book() {
                     className="glass-card p-6 sm:p-10 rounded-2xl border border-gray-200/60 shadow-premium"
                   >
                     <div className="mb-8 flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-gold-gradient/10 border border-accent/20 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-xl bg-sky-gradient/10 border border-accent/20 flex items-center justify-center">
                         <Sparkles className="h-5 w-5 text-accent animate-pulse" />
                       </div>
                       <div>
@@ -622,7 +622,7 @@ export default function Book() {
                         whileTap={{ scale: 0.98 }}
                         disabled={loading}
                         type="submit"
-                        className="w-full py-4 bg-gold-gradient text-primary font-bold rounded-xl shadow-gold hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
+                        className="w-full py-4 bg-sky-gradient text-primary font-bold rounded-xl shadow-sky hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
                       >
                         {loading ? (
                           <>
@@ -645,7 +645,7 @@ export default function Book() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="glass-card p-8 sm:p-12 rounded-2xl border border-gray-200/60 shadow-premium text-center flex flex-col items-center justify-center min-h-[400px]"
                   >
-                    <div className="w-16 h-16 rounded-full bg-gold-gradient flex items-center justify-center shadow-gold mb-6">
+                    <div className="w-16 h-16 rounded-full bg-sky-gradient flex items-center justify-center shadow-sky mb-6">
                       <CheckCircle className="h-8 w-8 text-primary" />
                     </div>
                     <h2 className="text-2xl font-bold text-primary mb-3">Request Submitted!</h2>
@@ -693,7 +693,7 @@ export default function Book() {
             {/* Right: Sidebar */}
             <div className="lg:col-span-4 space-y-8">
               {/* Contact Card */}
-              <div className="bg-primary text-white rounded-2xl p-8 border border-white/10 relative overflow-hidden">
+              <div className="bg-white rounded-2xl p-8 border border-accent/15 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-48 h-48 bg-accent/5 rounded-full blur-2xl pointer-events-none" />
                 
                 <h3 className="text-base font-bold text-accent uppercase tracking-wider mb-6">
@@ -704,16 +704,16 @@ export default function Book() {
                   <li className="flex items-start gap-4">
                     <User className="h-5 w-5 text-accent shrink-0 mt-0.5" />
                     <div>
-                      <span className="block text-xs text-gray-400 font-medium">Contact Person</span>
-                      <span className="text-sm text-gray-100 font-semibold">A. Suresh Kumar</span>
+                      <span className="block text-xs text-secondary font-medium">Contact Person</span>
+                      <span className="text-sm text-primary font-semibold">A. Suresh Kumar</span>
                     </div>
                   </li>
 
                   <li className="flex items-start gap-4">
                     <Phone className="h-5 w-5 text-accent shrink-0 mt-0.5" />
                     <div>
-                      <span className="block text-xs text-gray-400 font-medium">Direct Phone / WhatsApp</span>
-                      <a href="tel:+919666991668" className="text-sm text-gray-100 font-semibold hover:text-accent transition-colors">
+                      <span className="block text-xs text-secondary font-medium">Direct Phone / WhatsApp</span>
+                      <a href="tel:+919666991668" className="text-sm text-primary font-semibold hover:text-accent transition-colors">
                         +91 96669 91668
                       </a>
                     </div>
@@ -722,8 +722,8 @@ export default function Book() {
                   <li className="flex items-start gap-4">
                     <Mail className="h-5 w-5 text-accent shrink-0 mt-0.5" />
                     <div>
-                      <span className="block text-xs text-gray-400 font-medium">Official Email</span>
-                      <a href="mailto:manjuabroadconsultancy@gmail.com" className="text-sm text-gray-100 font-semibold hover:text-accent transition-colors break-all">
+                      <span className="block text-xs text-secondary font-medium">Official Email</span>
+                      <a href="mailto:manjuabroadconsultancy@gmail.com" className="text-sm text-primary font-semibold hover:text-accent transition-colors break-all">
                         manjuabroadconsultancy@gmail.com
                       </a>
                     </div>

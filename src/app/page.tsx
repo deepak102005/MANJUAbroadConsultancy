@@ -179,16 +179,16 @@ export default function Home() {
           />
         </video>
 
-        {/* Subtle white gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/50 to-primary/80 z-10" />
+        {/* Soft light overlay with sky-bluish tint so video colors shine through clearly but text remains readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-bgLight/40 via-bgLight/55 to-bgLight/70 z-10 backdrop-blur-[0.5px]" />
 
         {/* Hero Content */}
-        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white pt-20">
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/15 border border-accent/20 mb-8"
           >
             <ShieldCheck className="h-4 w-4 text-accent" />
             <span className="text-xs font-semibold tracking-[0.15em] uppercase text-accent">
@@ -200,18 +200,18 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight mb-6"
+            className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight text-primary mb-6"
           >
             Your Future.
             <br />
-            <span className="text-gold-gradient">Our Promise.</span>
+            <span className="text-sky-gradient">Our Promise.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="max-w-3xl mx-auto text-base sm:text-lg md:text-xl text-gray-300 mb-10 leading-relaxed font-light"
+            className="max-w-3xl mx-auto text-base sm:text-lg md:text-xl text-secondary mb-10 leading-relaxed font-light"
           >
             Professional DS-160 form preparation, consulate center timing advice, and manual biometrics & visa interview slot booking for high-demand times.
           </motion.p>
@@ -223,13 +223,13 @@ export default function Home() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
             <Link href="/book" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-8 py-4 bg-gold-gradient text-primary font-bold rounded-xl shadow-gold hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2 group">
+              <button className="w-full sm:w-auto px-8 py-4 bg-sky-gradient text-primary font-bold rounded-xl shadow-sky hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2 group">
                 Book Visa Slot
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </Link>
             <Link href="/contact" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 font-bold rounded-xl transition-all duration-300">
+              <button className="w-full sm:w-auto px-8 py-4 bg-white border border-accent/25 text-primary hover:bg-accent/5 font-bold rounded-xl shadow-premium transition-all duration-300">
                 Free Consultation
               </button>
             </Link>
@@ -240,7 +240,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto border-t border-white/10 pt-8"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto border-t border-accent/10 pt-8"
           >
             {[
               "Registered Consultancy",
@@ -250,7 +250,7 @@ export default function Home() {
             ].map((badge, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center gap-2 text-xs sm:text-sm text-gray-300 font-medium"
+                className="flex items-center justify-center gap-2 text-xs sm:text-sm text-secondary font-medium"
               >
                 <CheckCircle className="h-4 w-4 text-accent shrink-0" />
                 <span>{badge}</span>
@@ -261,7 +261,7 @@ export default function Home() {
       </section>
 
       {/* 2. Statistics Section */}
-      <section className="relative z-30 py-16 bg-primary border-y border-white/5">
+      <section className="relative z-30 py-16 bg-white border-y border-accent/15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, index) => {
@@ -275,13 +275,13 @@ export default function Home() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="flex flex-col items-center justify-center text-center p-4"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-4 border border-white/10">
+                  <div className="w-12 h-12 rounded-xl bg-accent/5 flex items-center justify-center mb-4 border border-accent/10">
                     <Icon className="h-6 w-6 text-accent" />
                   </div>
-                  <span className="text-4xl sm:text-5xl font-bold text-white mb-2 tracking-tight">
+                  <span className="text-4xl sm:text-5xl font-bold text-primary mb-2 tracking-tight">
                     {stat.value}
                   </span>
-                  <span className="text-xs sm:text-sm font-medium text-gray-400">
+                  <span className="text-xs sm:text-sm font-medium text-secondary">
                     {stat.label}
                   </span>
                 </motion.div>
@@ -335,16 +335,16 @@ export default function Home() {
       </section>
 
       {/* 4. Support Profiles Section */}
-      <section className="py-24 bg-primary text-white relative overflow-hidden">
+      <section className="py-24 bg-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-light/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-base font-semibold uppercase tracking-wider text-accent mb-3">
               Consulate Solutions
             </h2>
-            <p className="text-3xl sm:text-4xl font-bold tracking-tight">
+            <p className="text-3xl sm:text-4xl font-bold tracking-tight text-primary">
               Visa Types We Schedule & Consult For
             </p>
             <div className="h-1 w-12 bg-accent mx-auto mt-4" />
@@ -359,13 +359,13 @@ export default function Home() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.08 }}
-                  className="bg-white/5 border border-white/10 hover:border-accent/40 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 group"
+                  className="bg-bgLight border border-accent/15 hover:border-accent/40 rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 group"
                 >
                   <div>
-                    <h3 className="text-lg font-bold text-white mb-3 group-hover:text-accent transition-colors">
+                    <h3 className="text-lg font-bold text-primary mb-3 group-hover:text-accent transition-colors">
                       {visa.title}
                     </h3>
-                    <p className="text-xs text-gray-300 font-light leading-relaxed mb-4">
+                    <p className="text-xs text-secondary font-light leading-relaxed mb-4">
                       {visa.desc}
                     </p>
                   </div>
@@ -426,7 +426,7 @@ export default function Home() {
       </section>
 
       {/* 5. Process Timeline Section */}
-      <section className="py-24 bg-primary/5">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-base font-semibold uppercase tracking-wider text-accent mb-3">
@@ -453,7 +453,7 @@ export default function Home() {
                     }`}
                   >
                     {/* Timeline Node */}
-                    <div className="absolute left-4 lg:left-1/2 w-8 h-8 rounded-full bg-gold-gradient border-4 border-bgLight shadow-gold -translate-x-1/2 flex items-center justify-center text-xs font-bold text-primary z-10" />
+                    <div className="absolute left-4 lg:left-1/2 w-8 h-8 rounded-full bg-sky-gradient border-4 border-bgLight shadow-sky -translate-x-1/2 flex items-center justify-center text-xs font-bold text-primary z-10" />
 
                     {/* Left space/card content */}
                     <div className="w-full lg:w-1/2 pl-12 lg:pl-0 lg:px-8">
@@ -530,9 +530,9 @@ export default function Home() {
       </section>
 
       {/* 7. Final CTA Section */}
-      <section className="relative py-24 bg-dark-gradient overflow-hidden text-white border-t border-white/10">
+      <section className="relative py-24 bg-dark-gradient overflow-hidden border-t border-accent/15">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-light/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <motion.div
@@ -542,20 +542,20 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="space-y-8"
           >
-            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight">
-              Ready To Secure Your <span className="text-gold-gradient">Visa Slot?</span>
+            <h2 className="text-4xl sm:text-5xl font-bold tracking-tight text-primary">
+              Ready To Secure Your <span className="text-sky-gradient">Visa Slot?</span>
             </h2>
-            <p className="text-gray-300 text-lg max-w-xl mx-auto font-light leading-relaxed">
+            <p className="text-secondary text-lg max-w-xl mx-auto font-light leading-relaxed">
               Unlock successful scheduling and error-free forms. Book with our consulate experts today.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <Link href="/book" className="w-full sm:w-auto">
-                <button className="w-full sm:w-auto px-8 py-4 bg-gold-gradient text-primary font-bold rounded-xl shadow-gold hover:shadow-2xl transition-all duration-300">
+                <button className="w-full sm:w-auto px-8 py-4 bg-sky-gradient text-primary font-bold rounded-xl shadow-sky hover:shadow-2xl transition-all duration-300">
                   Book Visa Slot
                 </button>
               </Link>
               <Link href="/contact" className="w-full sm:w-auto">
-                <button className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 hover:bg-white/10 text-white font-bold rounded-xl transition-all duration-300">
+                <button className="w-full sm:w-auto px-8 py-4 bg-white border border-accent/25 text-primary hover:bg-accent/5 font-bold rounded-xl shadow-premium transition-all duration-300">
                   Talk To Consultant
                 </button>
               </Link>

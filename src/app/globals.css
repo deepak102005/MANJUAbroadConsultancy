@@ -10,8 +10,8 @@
 
 body {
   font-family: var(--font-inter), sans-serif;
-  background-color: #F9FAFB;
-  color: #111827;
+  background-color: #FFFFFF;
+  color: #202A36;
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
@@ -32,8 +32,8 @@ body {
 .glass-card-hover:hover {
   transform: translateY(-6px);
   background: rgba(255, 255, 255, 0.8);
-  border-color: rgba(212, 175, 55, 0.3);
-  box-shadow: 0 20px 40px -15px rgba(32, 42, 54, 0.1), 0 0 20px rgba(212, 175, 55, 0.05);
+  border-color: rgba(14, 165, 233, 0.3);
+  box-shadow: 0 20px 40px -15px rgba(32, 42, 54, 0.1), 0 0 20px rgba(14, 165, 233, 0.05);
 }
 
 .glass-nav {
@@ -43,19 +43,19 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Golden text and gradient accents */
-.text-gold-gradient {
-  background: linear-gradient(135deg, #E5C158 0%, #D4AF37 50%, #AA8C2C 100%);
+/* Sky blue text and gradient accents */
+.text-sky-gradient {
+  background: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 50%, #0284C7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.bg-gold-gradient {
-  background: linear-gradient(135deg, #E5C158 0%, #D4AF37 50%, #AA8C2C 100%);
+.bg-sky-gradient {
+  background: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 50%, #0284C7 100%);
 }
 
 .bg-dark-gradient {
-  background: linear-gradient(135deg, #202A36 0%, #171E27 100%);
+  background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
 }
 
 /* Custom Scrollbar */

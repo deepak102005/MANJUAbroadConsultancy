@@ -24,9 +24,9 @@ export default function About() {
   return (
     <div className="relative">
       {/* Page Hero */}
-      <section className="bg-dark-gradient py-24 md:py-32 border-b border-white/10 relative overflow-hidden">
+      <section className="bg-dark-gradient py-24 md:py-32 border-b border-accent/15 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-light/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 relative z-10">
           <motion.div
@@ -41,15 +41,15 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-6"
           >
-            About <span className="text-gold-gradient">MANJU ABROAD CONSULTANCY</span>
+            About <span className="text-sky-gradient">MANJU ABROAD CONSULTANCY</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-3xl mx-auto text-base sm:text-lg text-gray-300 leading-relaxed font-light"
+            className="max-w-3xl mx-auto text-base sm:text-lg text-secondary leading-relaxed font-light"
           >
             Helping students, professionals, and families achieve their dreams of traveling, studying, and working in the United States by providing focused visa center consultation and slot scheduling.
           </motion.p>
@@ -109,7 +109,7 @@ export default function About() {
             >
               {/* Mission Card */}
               <div className="glass-card p-8 rounded-2xl flex-1 flex flex-col">
-                <div className="w-10 h-10 rounded-xl bg-gold-gradient/10 border border-accent/20 flex items-center justify-center mb-4">
+                <div className="w-10 h-10 rounded-xl bg-sky-gradient/10 border border-accent/20 flex items-center justify-center mb-4">
                   <Target className="h-5 w-5 text-accent" />
                 </div>
                 <h3 className="text-lg font-bold text-primary mb-3">Our Mission</h3>
@@ -159,17 +159,17 @@ export default function About() {
           </div>
 
           {/* Why Clients Trust Us */}
-          <div className="rounded-3xl bg-primary text-white p-8 sm:p-12 md:p-16 relative overflow-hidden">
+          <div className="rounded-3xl bg-white border border-accent/15 p-8 sm:p-12 md:p-16 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="text-accent text-sm font-semibold uppercase tracking-wider mb-2">
                   Focused Approach
                 </h2>
-                <h3 className="text-3xl font-bold mb-4 tracking-tight">
+                <h3 className="text-3xl font-bold mb-4 tracking-tight text-primary">
                   Strategic Solutions for Consulate Booking
                 </h3>
-                <p className="text-gray-300 text-sm font-light leading-relaxed mb-6">
+                <p className="text-secondary text-sm font-light leading-relaxed mb-6">
                   US visa slot scheduling involves daily tracking and technical forms. We concentrate fully on checking slot availability, optimizing biometrics & interview timing, and filing accurate forms.
                 </p>
               </div>
@@ -181,10 +181,10 @@ export default function About() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10"
+                    className="flex items-center gap-3 p-4 rounded-xl bg-bgLight border border-accent/10"
                   >
                     <CheckCircle2 className="h-5 w-5 text-accent shrink-0" />
-                    <span className="text-sm text-gray-200 font-medium">{reason}</span>
+                    <span className="text-sm text-primary font-medium">{reason}</span>
                   </motion.div>
                 ))}
               </div>

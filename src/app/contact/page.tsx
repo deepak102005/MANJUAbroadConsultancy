@@ -53,24 +53,24 @@ export default function Contact() {
   return (
     <div className="relative">
       {/* Page Hero */}
-      <section className="bg-dark-gradient py-24 md:py-32 border-b border-white/10 relative overflow-hidden">
+      <section className="bg-dark-gradient py-24 md:py-32 border-b border-accent/15 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-light/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-8 relative z-10">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold text-primary mb-6"
           >
-            Contact <span className="text-gold-gradient">Us</span>
+            Contact <span className="text-sky-gradient">Us</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-3xl mx-auto text-base sm:text-lg text-gray-300 leading-relaxed font-light"
+            className="max-w-3xl mx-auto text-base sm:text-lg text-secondary leading-relaxed font-light"
           >
             Get in touch with our visa experts today. We respond within 24 hours.
           </motion.p>
@@ -107,7 +107,7 @@ export default function Contact() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="glass-card p-6 rounded-2xl flex flex-col items-center text-center border border-gray-200/60"
             >
-              <div className="w-12 h-12 rounded-xl bg-gold-gradient/10 border border-accent/20 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-xl bg-sky-gradient/10 border border-accent/20 flex items-center justify-center mb-4">
                 <Mail className="h-6 w-6 text-accent" />
               </div>
               <h3 className="text-sm font-bold text-primary mb-2">Email Address</h3>
@@ -124,7 +124,7 @@ export default function Contact() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="glass-card p-6 rounded-2xl flex flex-col items-center text-center border border-gray-200/60"
             >
-              <div className="w-12 h-12 rounded-xl bg-gold-gradient/10 border border-accent/20 flex items-center justify-center mb-4">
+              <div className="w-12 h-12 rounded-xl bg-sky-gradient/10 border border-accent/20 flex items-center justify-center mb-4">
                 <Clock className="h-6 w-6 text-accent" />
               </div>
               <h3 className="text-sm font-bold text-primary mb-2">Office Hours</h3>
@@ -253,7 +253,7 @@ export default function Contact() {
                   whileTap={{ scale: 0.98 }}
                   disabled={loading}
                   type="submit"
-                  className="w-full py-4 bg-primary text-white font-bold rounded-xl shadow-premium hover:bg-primary-dark transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
+                  className="w-full py-4 bg-sky-gradient text-primary font-bold rounded-xl shadow-sky hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
                 >
                   {loading ? (
                     <>

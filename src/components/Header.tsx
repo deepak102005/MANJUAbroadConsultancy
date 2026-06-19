@@ -56,7 +56,7 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-primary/90 backdrop-blur-md border-b border-white/10 shadow-premium py-4"
+          ? "bg-white/90 backdrop-blur-md border-b border-accent/10 shadow-premium py-4"
           : "bg-transparent py-6"
       }`}
     >
@@ -64,7 +64,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 sm:gap-4 group">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white flex items-center justify-center shadow-gold overflow-hidden group-hover:scale-105 transition-transform duration-300">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white flex items-center justify-center shadow-sky overflow-hidden group-hover:scale-105 transition-transform duration-300">
               <Image
                 src={logo}
                 alt="MANJU ABROAD CONSULTANCY Logo"
@@ -74,10 +74,10 @@ export default function Header() {
               />
             </div>
             <div>
-              <span className="block text-2xl sm:text-3xl font-serif font-extrabold tracking-wider text-white group-hover:text-accent transition-colors duration-300">
+              <span className="block text-2xl sm:text-3xl font-serif font-extrabold tracking-wider text-primary group-hover:text-accent transition-colors duration-300">
                 MANJU
               </span>
-              <span className="block text-[10px] sm:text-xs tracking-[0.22em] font-bold text-gold-gradient uppercase -mt-0.5">
+              <span className="block text-[10px] sm:text-xs tracking-[0.22em] font-bold text-sky-gradient uppercase -mt-0.5">
                 Abroad Consultancy
               </span>
             </div>
@@ -92,7 +92,7 @@ export default function Header() {
                   key={item.name}
                   href={item.href}
                   className={`relative text-sm font-medium tracking-wide transition-colors duration-300 py-1 ${
-                    isActive ? "text-accent" : "text-gray-300 hover:text-white"
+                    isActive ? "text-accent font-semibold" : "text-secondary hover:text-primary"
                   }`}
                 >
                   {item.name}
@@ -112,13 +112,13 @@ export default function Header() {
           <div className="hidden md:flex items-center gap-4">
             {user ? (
               <div className="flex items-center gap-4">
-                <span className="text-gray-300 text-sm font-medium flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-lg border border-white/5">
+                <span className="text-secondary text-sm font-medium flex items-center gap-1.5 bg-white/50 px-3 py-1.5 rounded-lg border border-accent/10">
                   <User className="h-4 w-4 text-accent" />
                   Hi, <span className="text-accent font-semibold">{user.name.split(" ")[0]}</span>
                 </span>
                 <button
                   onClick={handleLogout}
-                  className="px-4 py-2 border border-white/10 hover:border-red-500/30 hover:bg-red-500/10 text-gray-300 hover:text-red-400 text-xs font-semibold rounded-xl transition-all duration-300 flex items-center gap-1.5 cursor-pointer"
+                  className="px-4 py-2 border border-gray-200 hover:border-red-500/30 hover:bg-red-500/5 text-secondary hover:text-red-500 text-xs font-semibold rounded-xl transition-all duration-300 flex items-center gap-1.5 cursor-pointer"
                 >
                   <LogOut className="h-3.5 w-3.5" />
                   Log Out
@@ -127,7 +127,7 @@ export default function Header() {
             ) : (
               <>
                 <Link href="/auth/signin">
-                  <button className="text-gray-300 hover:text-white text-sm font-medium px-4 py-2 transition-colors cursor-pointer">
+                  <button className="text-secondary hover:text-primary text-sm font-medium px-4 py-2 transition-colors cursor-pointer">
                     Sign In
                   </button>
                 </Link>
@@ -135,7 +135,7 @@ export default function Header() {
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    className="px-6 py-2.5 bg-gold-gradient text-primary font-bold text-sm rounded-xl shadow-gold hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    className="px-6 py-2.5 bg-sky-gradient text-primary font-bold text-sm rounded-xl shadow-sky hover:shadow-xl transition-all duration-300 cursor-pointer"
                   >
                     Sign Up
                   </motion.button>
@@ -147,7 +147,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-gray-300 hover:text-white focus:outline-none"
+            className="md:hidden p-2 rounded-lg text-secondary hover:text-primary focus:outline-none"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? (
@@ -166,7 +166,7 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-primary-dark/95 border-b border-white/10 backdrop-blur-lg overflow-hidden"
+            className="md:hidden bg-white/95 border-b border-accent/10 backdrop-blur-lg overflow-hidden"
           >
             <div className="px-4 pt-2 pb-6 space-y-2">
               {navigation.map((item) => {
@@ -179,17 +179,17 @@ export default function Header() {
                     className={`block px-4 py-3 rounded-xl text-base font-medium transition-colors ${
                       isActive
                         ? "bg-accent/10 text-accent font-semibold"
-                        : "text-gray-300 hover:bg-white/5 hover:text-white"
+                        : "text-secondary hover:bg-accent/5 hover:text-primary"
                     }`}
                   >
                     {item.name}
                   </Link>
                 );
               })}
-              <div className="pt-4 px-4 border-t border-white/10">
+              <div className="pt-4 px-4 border-t border-gray-200">
                 {user ? (
                   <div className="flex flex-col gap-3">
-                    <div className="text-center text-gray-300 text-sm py-2">
+                    <div className="text-center text-secondary text-sm py-2">
                       Logged in as <span className="text-accent font-bold">{user.name}</span>
                     </div>
                     <button
@@ -206,12 +206,12 @@ export default function Header() {
                 ) : (
                   <div className="flex flex-col gap-3">
                     <Link href="/auth/signin" onClick={() => setMobileMenuOpen(false)}>
-                      <button className="w-full py-3 border border-white/10 hover:bg-white/5 text-white font-bold text-center rounded-xl cursor-pointer">
+                      <button className="w-full py-3 border border-gray-200 hover:bg-gray-50 text-secondary font-bold text-center rounded-xl cursor-pointer">
                         Sign In
                       </button>
                     </Link>
                     <Link href="/auth/signup" onClick={() => setMobileMenuOpen(false)}>
-                      <button className="w-full py-3 bg-gold-gradient text-primary font-bold text-center rounded-xl shadow-gold cursor-pointer">
+                      <button className="w-full py-3 bg-sky-gradient text-primary font-bold text-center rounded-xl shadow-sky cursor-pointer">
                         Sign Up
                       </button>
                     </Link>

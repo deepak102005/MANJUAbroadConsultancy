@@ -19,11 +19,11 @@ module.exports = {
           light: "#4B5563",
         },
         accent: {
-          DEFAULT: "#D4AF37", // Premium Gold
-          dark: "#AA8C2C",
-          light: "#E5C158",
+          DEFAULT: "#0EA5E9", // Sky Blue
+          dark: "#0284C7",
+          light: "#38BDF8",
         },
-        bgLight: "#F9FAFB",
+        bgLight: "#F0F9FF", // Light sky bluish
         textDark: "#111827",
       },
       fontFamily: {
@@ -32,7 +32,7 @@ module.exports = {
       },
       boxShadow: {
         premium: "0 10px 30px -10px rgba(32, 42, 54, 0.08)",
-        gold: "0 10px 30px -10px rgba(212, 175, 55, 0.15)",
+        sky: "0 10px 30px -10px rgba(14, 165, 233, 0.15)",
         glass: "0 8px 32px 0 rgba(31, 38, 135, 0.04)",
       },
     },

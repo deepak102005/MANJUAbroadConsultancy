@@ -76,12 +76,12 @@ export default function SignIn() {
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
         <Link href="/" className="flex flex-col items-center justify-center gap-3">
-          <div className="w-16 h-16 rounded-xl bg-white flex items-center justify-center shadow-gold overflow-hidden hover:scale-105 transition-transform duration-300">
+          <div className="w-16 h-16 rounded-xl bg-white flex items-center justify-center shadow-sky overflow-hidden hover:scale-105 transition-transform duration-300">
             <Image src={logo} alt="MANJU ABROAD CONSULTANCY Logo" width={64} height={64} className="w-full h-full object-cover" />
           </div>
           <div className="text-center">
             <span className="block text-2xl font-serif font-extrabold tracking-wider text-white">MANJU</span>
-            <span className="block text-[10px] tracking-[0.22em] font-bold text-gold-gradient uppercase -mt-0.5">Abroad Consultancy</span>
+            <span className="block text-[10px] tracking-[0.22em] font-bold text-sky-gradient uppercase -mt-0.5">Abroad Consultancy</span>
           </div>
         </Link>
       </div>
@@ -94,7 +94,7 @@ export default function SignIn() {
               animate={{ opacity: 1, scale: 1 }}
               className="text-center py-8 space-y-4"
             >
-              <div className="w-16 h-16 rounded-full bg-gold-gradient flex items-center justify-center shadow-gold mx-auto mb-4 animate-bounce">
+              <div className="w-16 h-16 rounded-full bg-sky-gradient flex items-center justify-center shadow-sky mx-auto mb-4 animate-bounce">
                 <CheckCircle className="h-8 w-8 text-primary" />
               </div>
               <h2 className="text-xl font-bold text-white">Welcome Back!</h2>
@@ -170,7 +170,7 @@ export default function SignIn() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 bg-gold-gradient text-primary font-bold text-sm rounded-xl shadow-gold hover:shadow-xl transition-all duration-300 disabled:opacity-50 flex items-center justify-center cursor-pointer"
+                  className="w-full py-3 bg-sky-gradient text-primary font-bold text-sm rounded-xl shadow-sky hover:shadow-xl transition-all duration-300 disabled:opacity-50 flex items-center justify-center cursor-pointer"
                 >
                   {loading ? (
                     <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
