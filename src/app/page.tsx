@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import videoBg from "../../assets/manju.mp4";
 import {
   ShieldCheck,
   CheckCircle,
@@ -171,16 +172,15 @@ export default function Home() {
           muted
           loop
           playsInline
-          className="absolute top-0 left-0 w-full h-full object-cover z-0"
+          className="absolute top-0 left-0 w-full h-full object-cover z-0 scale-[1.25] origin-top-left"
         >
           <source
-            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_091828_e240eb17-6edc-4129-ad9d-98678e3fd238.mp4"
+            src={videoBg}
             type="video/mp4"
           />
         </video>
 
-        {/* Soft light overlay with sky-bluish tint so video colors shine through clearly but text remains readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-bgLight/40 via-bgLight/55 to-bgLight/70 z-10 backdrop-blur-[0.5px]" />
+
 
         {/* Hero Content */}
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
@@ -211,7 +211,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="max-w-3xl mx-auto text-base sm:text-lg md:text-xl text-secondary mb-10 leading-relaxed font-light"
+            className="max-w-3xl mx-auto text-base sm:text-lg md:text-xl text-black mb-10 leading-relaxed font-medium"
           >
             Professional DS-160 form preparation, consulate center timing advice, and manual biometrics & visa interview slot booking for high-demand times.
           </motion.p>
@@ -223,13 +223,13 @@ export default function Home() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
             <Link href="/book" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-8 py-4 bg-sky-gradient text-primary font-bold rounded-xl shadow-sky hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2 group">
+              <button className="w-full sm:w-auto px-8 py-4 bg-sky-gradient text-black font-bold rounded-xl shadow-sky hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2 group">
                 Book Visa Slot
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </Link>
             <Link href="/contact" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-8 py-4 bg-white border border-accent/25 text-primary hover:bg-accent/5 font-bold rounded-xl shadow-premium transition-all duration-300">
+              <button className="w-full sm:w-auto px-8 py-4 bg-white border border-accent/25 text-black hover:bg-accent/5 font-bold rounded-xl shadow-premium transition-all duration-300">
                 Free Consultation
               </button>
             </Link>
@@ -250,7 +250,7 @@ export default function Home() {
             ].map((badge, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center gap-2 text-xs sm:text-sm text-secondary font-medium"
+                className="flex items-center justify-center gap-2 text-xs sm:text-sm text-black font-semibold"
               >
                 <CheckCircle className="h-4 w-4 text-accent shrink-0" />
                 <span>{badge}</span>
