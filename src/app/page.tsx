@@ -46,6 +46,11 @@ const coreServices = [
     desc: "Fast and manual assistance to secure hard-to-find biometrics and consulate interview appointments during high-demand peak seasons.",
     icon: Calendar,
   },
+  {
+    title: "End-to-End Visa Assistance",
+    desc: "Professional DS-160 form preparation, consulate center timing advice, and manual biometrics & visa interview slot booking for high-demand times.",
+    icon: Award,
+  },
 ];
 
 // Why Choose Us Data
@@ -200,21 +205,12 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight text-primary mb-6"
+            className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight text-primary mb-16"
           >
             Your Future.
             <br />
             <span className="text-sky-gradient">Our Promise.</span>
           </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="max-w-3xl mx-auto text-base sm:text-lg md:text-xl text-black mb-10 leading-relaxed font-medium"
-          >
-            Professional DS-160 form preparation, consulate center timing advice, and manual biometrics & visa interview slot booking for high-demand times.
-          </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -223,25 +219,26 @@ export default function Home() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
             <Link href="/book" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-8 py-4 bg-sky-gradient text-black font-bold rounded-xl shadow-sky hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2 group">
+              <button className="w-full sm:w-auto px-8 py-4 bg-sky-gradient text-sky-950 font-bold rounded-xl shadow-sky hover:shadow-2xl transition-all duration-300 flex items-center justify-center gap-2 group">
                 Book Visa Slot
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </Link>
             <Link href="/contact" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto px-8 py-4 bg-white border border-accent/25 text-black hover:bg-accent/5 font-bold rounded-xl shadow-premium transition-all duration-300">
+              <button className="w-full sm:w-auto px-8 py-4 bg-white border border-accent/25 text-sky-600 hover:bg-accent/5 font-bold rounded-xl shadow-premium transition-all duration-300">
                 Free Consultation
               </button>
             </Link>
           </motion.div>
 
+        </div>
+      </section>
+
+      {/* 2. Statistics Section */}
+      <section className="relative z-30 py-16 bg-white border-y border-accent/15">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Trust Badges */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.8 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto border-t border-accent/10 pt-8"
-          >
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-12 mb-12 border-b border-accent/10 pb-8">
             {[
               "Registered Consultancy",
               "Consulate Center Advice",
@@ -250,43 +247,41 @@ export default function Home() {
             ].map((badge, index) => (
               <div
                 key={index}
-                className="flex items-center justify-center gap-2 text-xs sm:text-sm text-black font-semibold"
+                className="flex items-center justify-center gap-2 text-xs sm:text-sm text-sky-700 font-semibold"
               >
                 <CheckCircle className="h-4 w-4 text-accent shrink-0" />
                 <span>{badge}</span>
               </div>
             ))}
-          </motion.div>
-        </div>
-      </section>
+          </div>
 
-      {/* 2. Statistics Section */}
-      <section className="relative z-30 py-16 bg-white border-y border-accent/15">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex flex-col items-center justify-center text-center p-4"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-accent/5 flex items-center justify-center mb-4 border border-accent/10">
-                    <Icon className="h-6 w-6 text-accent" />
-                  </div>
-                  <span className="text-4xl sm:text-5xl font-bold text-primary mb-2 tracking-tight">
-                    {stat.value}
-                  </span>
-                  <span className="text-xs sm:text-sm font-medium text-secondary">
-                    {stat.label}
-                  </span>
-                </motion.div>
-              );
-            })}
+          {/* Statistics Grid inside One Card */}
+          <div className="glass-card p-8 sm:p-12 rounded-3xl border border-accent/10 shadow-premium-lg">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+              {stats.map((stat, index) => {
+                const Icon = stat.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="flex flex-col items-center justify-center text-center p-2"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-accent/5 flex items-center justify-center mb-4 border border-accent/10">
+                      <Icon className="h-6 w-6 text-accent" />
+                    </div>
+                    <span className="text-4xl sm:text-5xl font-bold text-primary mb-2 tracking-tight">
+                      {stat.value}
+                    </span>
+                    <span className="text-xs sm:text-sm font-medium text-secondary">
+                      {stat.label}
+                    </span>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
@@ -304,7 +299,7 @@ export default function Home() {
             <div className="h-1 w-12 bg-accent mx-auto mt-4" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {coreServices.map((feat, index) => {
               const Icon = feat.icon;
               return (
