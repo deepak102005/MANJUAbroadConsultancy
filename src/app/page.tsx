@@ -3,7 +3,8 @@
 import React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import videoBg from "../../assets/manju.mp4";
+import videoBg from "../../assets/manju (2).mp4";
+
 import {
   ShieldCheck,
   CheckCircle,
@@ -177,16 +178,10 @@ export default function Home() {
           muted
           loop
           playsInline
-          className="absolute top-0 left-0 w-full h-full object-cover z-0 scale-[1.25] origin-top-left"
+          className="absolute top-0 left-0 w-full h-full object-cover z-0 scale-[1.15] origin-top-left"
         >
-          <source
-            src={videoBg}
-            type="video/mp4"
-          />
+          <source src={videoBg} type="video/mp4" />
         </video>
-
-
-
         {/* Hero Content */}
         <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
           <motion.div

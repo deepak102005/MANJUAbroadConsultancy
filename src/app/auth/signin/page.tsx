@@ -146,9 +146,17 @@ export default function SignIn() {
 
                 {/* Password */}
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-secondary mb-1.5">
-                    Password
-                  </label>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="block text-[11px] font-bold uppercase tracking-wider text-secondary">
+                      Password
+                    </label>
+                    <Link
+                      href="/auth/forgot-password"
+                      className="text-[11px] text-accent hover:text-accent/70 font-semibold hover:underline transition-colors"
+                    >
+                      Forgot Password?
+                    </Link>
+                  </div>
                   <div className="relative">
                     <input
                       name="password"

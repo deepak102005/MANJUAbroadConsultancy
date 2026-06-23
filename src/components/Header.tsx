@@ -57,7 +57,7 @@ export default function Header() {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-white/90 backdrop-blur-md border-b border-accent/10 shadow-premium py-4"
-          : "bg-transparent py-6"
+          : "bg-gradient-to-b from-black/40 via-black/10 to-transparent py-6"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,7 +74,9 @@ export default function Header() {
               />
             </div>
             <div>
-              <span className="block text-2xl sm:text-3xl font-serif font-extrabold tracking-wider text-primary group-hover:text-accent transition-colors duration-300">
+              <span className={`block text-2xl sm:text-3xl font-serif font-extrabold tracking-wider transition-colors duration-300 ${
+                scrolled ? "text-primary group-hover:text-accent" : "text-white drop-shadow-md"
+              }`}>
                 MANJU
               </span>
               <span className="block text-[10px] sm:text-xs tracking-[0.22em] font-bold text-sky-gradient uppercase -mt-0.5">
@@ -91,8 +93,12 @@ export default function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`relative text-sm font-medium tracking-wide transition-colors duration-300 py-1 ${
-                    isActive ? "text-accent font-semibold" : "text-secondary hover:text-primary"
+                  className={`relative text-sm tracking-wide transition-colors duration-300 py-1 ${
+                    isActive
+                      ? "text-accent font-bold"
+                      : scrolled
+                      ? "text-secondary font-semibold hover:text-primary"
+                      : "text-white font-bold drop-shadow-md hover:text-sky-200"
                   }`}
                 >
                   {item.name}
@@ -127,7 +133,9 @@ export default function Header() {
             ) : (
               <>
                 <Link href="/auth/signin">
-                  <button className="text-secondary hover:text-primary text-sm font-medium px-4 py-2 transition-colors cursor-pointer">
+                  <button className={`text-sm font-bold px-4 py-2 transition-colors cursor-pointer ${
+                    scrolled ? "text-secondary hover:text-primary" : "text-white drop-shadow-md hover:text-sky-200"
+                  }`}>
                     Sign In
                   </button>
                 </Link>
