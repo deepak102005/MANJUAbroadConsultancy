@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
+import { sql, initBookingsDB } from "@/lib/db";
 
 export async function POST(request: Request) {
   try {
+    await initBookingsDB();
+
     const body = await request.json();
     const {
       name,
@@ -55,32 +58,27 @@ export async function POST(request: Request) {
       }
     }
 
-    // Node.js Backend mock persistence (database logs / security check logs)
-    console.log("==================================================");
-    console.log("NEW VISA SLOT BOOKING REQUEST RECEIVED:");
-    console.log(`Client Name: ${name}`);
-    console.log(`Phone: ${phone} (WhatsApp: ${whatsapp})`);
-    console.log(`Email: ${email} | City: ${city}`);
-    console.log("--------------------------------------------------");
-    console.log("USA VISA PORTAL LOGIN DETAILS:");
-    console.log(`User ID: ${userId}`);
-    console.log(`Password: ${password}`);
-    console.log(`Q1: ${secQuestion1 || "N/A"} -> Ans: ${secAns1 || "N/A"}`);
-    console.log(`Q2: ${secQuestion2 || "N/A"} -> Ans: ${secAns2 || "N/A"}`);
-    console.log(`Q3: ${secQuestion3 || "N/A"} -> Ans: ${secAns3 || "N/A"}`);
-    console.log("--------------------------------------------------");
-    console.log(`APPLICANTS DETAILS (${applicants.length}):`);
-    applicants.forEach((app, index) => {
-      console.log(`\n--- Applicant #${index + 1} ---`);
-      console.log(`Type of Visa: ${app.visaCategory}`);
-      console.log(`DS-160 Confirmation No: ${app.ds160Confirmation}`);
-      console.log(`Required Dates: ${app.requiredDates}`);
-      console.log(`Target Location: ${app.location}`);
-      console.log(`Client Message: ${app.message || "N/A"}`);
-    });
-    console.log("==================================================");
+    // Save to Neon DB
+    await sql`
+      INSERT INTO bookings (
+        name, phone, whatsapp, email, city,
+        user_id, password,
+        sec_question1, sec_ans1,
+        sec_question2, sec_ans2,
+        sec_question3, sec_ans3,
+        applicants
+      ) VALUES (
+        ${name}, ${phone}, ${whatsapp}, ${email}, ${city},
+        ${userId}, ${password},
+        ${secQuestion1 || null}, ${secAns1 || null},
+        ${secQuestion2 || null}, ${secAns2 || null},
+        ${secQuestion3 || null}, ${secAns3 || null},
+        ${JSON.stringify(applicants)}
+      )
+    `;
 
-    // Return success
+    console.log(`[BOOKING] Saved to DB: ${name} <${email}>`);
+
     return NextResponse.json(
       {
         success: true,
@@ -92,6 +90,22 @@ export async function POST(request: Request) {
     console.error("Backend Error in slot booking API:", error);
     return NextResponse.json(
       { error: "Internal Server Error. Please try again later." },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET() {
+  try {
+    await initBookingsDB();
+    const bookings = await sql`
+      SELECT * FROM bookings ORDER BY created_at DESC
+    `;
+    return NextResponse.json({ bookings });
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    return NextResponse.json(
+      { error: "Failed to fetch bookings." },
       { status: 500 }
     );
   }

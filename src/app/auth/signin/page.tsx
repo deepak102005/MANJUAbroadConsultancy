@@ -23,7 +23,7 @@ export default function SignIn() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
@@ -37,37 +37,34 @@ export default function SignIn() {
     }
 
     try {
-      // Fetch users from localStorage
-      const users = JSON.parse(localStorage.getItem("manju_users") || "[]");
-      const matchedUser = users.find(
-        (u: any) => u.email.toLowerCase() === email.toLowerCase() && u.password === password
-      );
+      const res = await fetch("/api/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
 
-      if (!matchedUser) {
-        setError("Invalid email or password. Please try again.");
+      if (!res.ok) {
+        setError(data.error || "Sign in failed. Please try again.");
         setLoading(false);
         return;
       }
 
-      // Store current user session in localStorage
+      // Store session locally for header display
       localStorage.setItem(
         "manju_currentUser",
-        JSON.stringify({ name: matchedUser.name, email: matchedUser.email })
+        JSON.stringify({ name: data.user.name, email: data.user.email })
       );
 
       setSuccess(true);
       setLoading(false);
 
-      // Redirect to homepage after 1.5 seconds and trigger header refresh
       setTimeout(() => {
         router.push("/");
-        // Wait another 100ms then trigger reload to refresh layout header
-        setTimeout(() => {
-          window.location.reload();
-        }, 100);
+        setTimeout(() => window.location.reload(), 100);
       }, 1500);
     } catch (err) {
-      setError("An error occurred during authentication.");
+      setError("Network error. Please try again.");
       setLoading(false);
     }
   };

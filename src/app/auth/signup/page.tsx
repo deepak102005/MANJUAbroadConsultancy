@@ -26,7 +26,7 @@ export default function SignUp() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
@@ -52,30 +52,24 @@ export default function SignUp() {
     }
 
     try {
-      // Simulate backend save using localStorage
-      const existingUsers = JSON.parse(localStorage.getItem("manju_users") || "[]");
-      const userExists = existingUsers.some((u: any) => u.email.toLowerCase() === email.toLowerCase());
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+      const data = await res.json();
 
-      if (userExists) {
-        setError("An account with this email already exists.");
+      if (!res.ok) {
+        setError(data.error || "Registration failed. Please try again.");
         setLoading(false);
         return;
       }
 
-      // Add new user
-      const newUser = { name, email, password };
-      existingUsers.push(newUser);
-      localStorage.setItem("manju_users", JSON.stringify(existingUsers));
-
       setSuccess(true);
       setLoading(false);
-
-      // Redirect to sign in page after 2 seconds
-      setTimeout(() => {
-        router.push("/auth/signin");
-      }, 2000);
+      setTimeout(() => router.push("/auth/signin"), 2000);
     } catch (err) {
-      setError("An error occurred. Please try again.");
+      setError("Network error. Please try again.");
       setLoading(false);
     }
   };
