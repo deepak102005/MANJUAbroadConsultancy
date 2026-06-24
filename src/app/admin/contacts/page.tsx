@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {
   User,
   Phone,
@@ -14,6 +16,8 @@ import {
   Calendar,
   ChevronDown,
   ChevronUp,
+  ArrowLeft,
+  LogOut,
 } from "lucide-react";
 
 interface Contact {
@@ -27,6 +31,7 @@ interface Contact {
 }
 
 export default function ContactsAdminPage() {
+  const router = useRouter();
   const [contacts, setContacts] = useState<Contact[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -51,12 +56,33 @@ export default function ContactsAdminPage() {
     fetchContacts();
   }, []);
 
-  return (
-    <div className="min-h-screen bg-bgLight py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+  const handleLogout = async () => {
+    await fetch("/api/admin/login", { method: "DELETE" });
+    router.push("/admin/login");
+  };
 
-        {/* Header */}
-        <div className="flex items-center justify-between mb-10">
+  return (
+    <div className="min-h-screen bg-bgLight">
+      {/* Admin Header */}
+      <header className="bg-primary-dark border-b border-white/10 px-6 py-4 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <Link href="/admin" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+            <ArrowLeft className="h-4 w-4" /> Dashboard
+          </Link>
+          <span className="text-gray-600">|</span>
+          <span className="text-white font-bold">Contact Inquiries</span>
+        </div>
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-1.5 px-3 py-1.5 bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-semibold rounded-lg cursor-pointer"
+        >
+          <LogOut className="h-3.5 w-3.5" /> Logout
+        </button>
+      </header>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        {/* Page Header */}
+        <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-bold text-primary tracking-tight">
               Contact Inquiries
@@ -67,7 +93,7 @@ export default function ContactsAdminPage() {
           </div>
           <button
             onClick={fetchContacts}
-            className="flex items-center gap-2 px-4 py-2 bg-sky-gradient text-primary font-bold text-sm rounded-xl shadow-sky hover:shadow-xl transition-all cursor-pointer"
+            className="flex items-center gap-2 px-4 py-2 border border-accent/20 hover:border-accent/50 text-accent text-sm font-semibold rounded-xl transition-all cursor-pointer"
           >
             <RefreshCw className={`h-4 w-4 ${loading ? "animate-spin" : ""}`} />
             Refresh

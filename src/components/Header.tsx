@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, Calendar, User, LogOut } from "lucide-react";
+import { Menu, X, Calendar, User, LogOut, Shield } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "../../assets/logo.png";
 
@@ -21,6 +21,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
   const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("manju_currentUser");
@@ -29,11 +30,23 @@ export default function Header() {
     }
   }, []);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     localStorage.removeItem("manju_currentUser");
     setUser(null);
+    try {
+      await fetch("/api/admin/login", { method: "DELETE" });
+    } catch (e) {
+      console.error(e);
+    }
     window.location.reload();
   };
+
+  useEffect(() => {
+    if (!dropdownOpen) return;
+    const closeDropdown = () => setDropdownOpen(false);
+    window.addEventListener("click", closeDropdown);
+    return () => window.removeEventListener("click", closeDropdown);
+  }, [dropdownOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,8 +60,8 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Hide header on auth pages
-  if (pathname?.startsWith("/auth")) {
+  // Hide header on auth and admin pages
+  if (pathname?.startsWith("/auth") || pathname?.startsWith("/admin")) {
     return null;
   }
 
@@ -117,18 +130,51 @@ export default function Header() {
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center gap-4">
             {user ? (
-              <div className="flex items-center gap-4">
-                <span className="text-secondary text-sm font-medium flex items-center gap-1.5 bg-white/50 px-3 py-1.5 rounded-lg border border-accent/10">
+              <div className="flex items-center gap-4 relative">
+                {/* Profile Button */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setDropdownOpen(!dropdownOpen);
+                  }}
+                  className="text-secondary text-sm font-medium flex items-center gap-1.5 bg-white/50 px-3 py-1.5 rounded-lg border border-accent/10 hover:bg-white/80 transition-all cursor-pointer focus:outline-none select-none"
+                >
                   <User className="h-4 w-4 text-accent" />
                   Hi, <span className="text-accent font-semibold">{user.name.split(" ")[0]}</span>
-                </span>
-                <button
-                  onClick={handleLogout}
-                  className="px-4 py-2 border border-gray-200 hover:border-red-500/30 hover:bg-red-500/5 text-secondary hover:text-red-500 text-xs font-semibold rounded-xl transition-all duration-300 flex items-center gap-1.5 cursor-pointer"
-                >
-                  <LogOut className="h-3.5 w-3.5" />
-                  Log Out
                 </button>
+
+                {/* Dropdown Menu */}
+                <AnimatePresence>
+                  {dropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl border border-accent/10 shadow-premium overflow-hidden z-50 py-1"
+                    >
+                      {user.name === "Admin" && (
+                        <Link
+                          href="/admin"
+                          onClick={() => setDropdownOpen(false)}
+                          className="flex items-center gap-2 px-4 py-2.5 text-sm text-secondary hover:text-primary hover:bg-accent/5 transition-colors font-semibold"
+                        >
+                          <Shield className="h-4 w-4 text-accent" />
+                          Admin Panel
+                        </Link>
+                      )}
+                      <button
+                        onClick={() => {
+                          setDropdownOpen(false);
+                          handleLogout();
+                        }}
+                        className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors font-semibold text-left cursor-pointer"
+                      >
+                        <LogOut className="h-4 w-4" />
+                        Log Out
+                      </button>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             ) : (
               <>
@@ -200,6 +246,16 @@ export default function Header() {
                     <div className="text-center text-secondary text-sm py-2">
                       Logged in as <span className="text-accent font-bold">{user.name}</span>
                     </div>
+                    {user.name === "Admin" && (
+                      <Link
+                        href="/admin"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="w-full py-3 border border-accent/20 bg-accent/5 hover:bg-accent/10 text-accent font-bold text-center rounded-xl flex items-center justify-center gap-2"
+                      >
+                        <Shield className="h-4 w-4" />
+                        Admin Panel
+                      </Link>
+                    )}
                     <button
                       onClick={() => {
                         setMobileMenuOpen(false);

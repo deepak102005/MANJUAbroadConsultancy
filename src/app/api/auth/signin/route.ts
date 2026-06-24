@@ -4,8 +4,6 @@ import { sql, initDB } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
   try {
-    await initDB();
-
     const { email, password } = await req.json();
 
     if (!email || !password) {
@@ -15,7 +13,34 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Find user
+    // ── Admin shortcut: check against env credentials ──
+    const adminEmail = process.env.ADMIN_EMAIL;
+    const adminPassword = process.env.ADMIN_PASSWORD;
+
+    if (
+      email.toLowerCase() === adminEmail?.toLowerCase() &&
+      password === adminPassword
+    ) {
+      const res = NextResponse.json(
+        {
+          user: { id: 0, name: "Admin", email },
+          isAdmin: true,
+        },
+        { status: 200 }
+      );
+      // Set the admin session cookie so /admin routes are accessible
+      res.cookies.set("admin_session", "authenticated", {
+        httpOnly: true,
+        maxAge: 60 * 60 * 8, // 8 hours
+        path: "/",
+        sameSite: "strict",
+      });
+      return res;
+    }
+
+    // ── Regular user login ──
+    await initDB();
+
     const rows = await sql`
       SELECT id, name, email, password FROM users
       WHERE LOWER(email) = LOWER(${email})
@@ -29,9 +54,8 @@ export async function POST(req: NextRequest) {
     }
 
     const user = rows[0];
-
-    // Compare password
     const valid = await bcrypt.compare(password, user.password);
+
     if (!valid) {
       return NextResponse.json(
         { error: "Invalid email or password. Please try again." },
@@ -40,7 +64,7 @@ export async function POST(req: NextRequest) {
     }
 
     return NextResponse.json(
-      { user: { id: user.id, name: user.name, email: user.email } },
+      { user: { id: user.id, name: user.name, email: user.email }, isAdmin: false },
       { status: 200 }
     );
   } catch (err: any) {

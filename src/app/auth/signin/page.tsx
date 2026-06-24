@@ -50,7 +50,22 @@ export default function SignIn() {
         return;
       }
 
-      // Store session locally for header display
+      // Admin → redirect to home page (same as customers) but keep admin session
+      if (data.isAdmin) {
+        localStorage.setItem(
+          "manju_currentUser",
+          JSON.stringify({ name: "Admin", email: email })
+        );
+        setSuccess(true);
+        setLoading(false);
+        setTimeout(() => {
+          router.push("/");
+          setTimeout(() => window.location.reload(), 100);
+        }, 1500);
+        return;
+      }
+
+      // Regular user → store session and go home
       localStorage.setItem(
         "manju_currentUser",
         JSON.stringify({ name: data.user.name, email: data.user.email })
